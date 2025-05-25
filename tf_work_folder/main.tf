@@ -55,3 +55,19 @@ module "compute" {
     code_bucket = var.code_bucket
     account_number = var.account_number
 }
+module "security" {
+    source = "./modules/security"
+    project_name = var.project_name
+    aws_region = var.aws_region
+}
+
+module "integration" {
+    source = "./modules/integration"
+    project_name = var.project_name
+    aws_region = var.aws_region
+    account_number = var.account_number
+    code_bucket = var.code_bucket
+    lambda_name = module.compute.lambda_name
+    lambda_arn = module.compute.lambda_arn
+    cognito_user_pool_id = module.security.cognito_user_pool_id
+}
