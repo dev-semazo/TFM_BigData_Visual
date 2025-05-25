@@ -69,21 +69,6 @@ resource "aws_glue_catalog_database" "gold_db" {
   description = "Base de datos gold del Data Lake"
 }
 
-#----------------------------------
-# LakeFormation
-#---------------------------------
-
-resource "aws_lakeformation_resource" "lf_bronze" {
-  arn = aws_s3_bucket.bronze_bucket.arn
-}
-
-resource "aws_lakeformation_resource" "lf_silver" {
-  arn = aws_s3_bucket.silver_bucket.arn
-}
-
-resource "aws_lakeformation_resource" "lf_gold" {
-  arn = aws_s3_bucket.gold_bucket.arn
-}
 
 #----------------------------------
 # Athena
