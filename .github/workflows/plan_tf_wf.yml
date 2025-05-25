@@ -24,11 +24,18 @@ jobs:
         with:
           terraform_version: 1.2.5
           
-      - name: Terraform Init
-        id: init
-        run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET_NAME }}" -backend-config="key=${{ vars.TF_STATE_FILE }}" -backend-config="region=${{ vars.AWS_REGION }}"
-        working-directory: .
-        
+      #Validación de Calidad
+      - name: Install tflint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          tflint --version
+
+      - name: Run tflint
+        id: tflint
+        run: tflint --enable-rule=terraform_unused_declarations # Puedes añadir otras reglas o usar un archivo .tflint.hcl
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        continue-on-error: false # Haz que el job falle si hay errores de linting
+
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
@@ -39,6 +46,12 @@ jobs:
         id: validate
         run: terraform validate
         working-directory: ${{ env.TF_WORKING_DIR }}
+      #Fin Validacion
+      
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET_NAME }}" -backend-config="key=${{ vars.TF_STATE_FILE }}" -backend-config="region=${{ vars.AWS_REGION }}"
+        working-directory: .
         
       - name: Terraform plan
         id: plan
