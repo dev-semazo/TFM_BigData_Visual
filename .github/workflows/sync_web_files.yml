@@ -3,6 +3,7 @@ on:
     branches: [ "main" ]
     paths:
       - 'web_source/**'
+  workflow_dispatch:
 permissions:
   id-token: write
   contents: read
