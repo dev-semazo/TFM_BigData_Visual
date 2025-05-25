@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       origin_access_identity = aws_cloudfront_origin_access_identity.web_oai.cloudfront_access_identity_path
     }
   }
-  enabled             = true
+  enabled             = false
   default_root_object = "index.html"
   default_cache_behavior {
     target_origin_id       = "S3Origin"
