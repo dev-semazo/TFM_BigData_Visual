@@ -12,7 +12,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "static_site_encry
 }
 
 resource "aws_s3_bucket_website_configuration" "static_site_config" {
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.static_site.id
 
   index_document {
     suffix = "index.html"

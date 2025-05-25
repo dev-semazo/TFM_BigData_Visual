@@ -14,13 +14,13 @@ terraform {
 }
 
 variable "aws_region" {
-  description = "Región de AWS para desplegar los recursos."
-  type        = string
+    description = "Región de AWS para desplegar los recursos."
+    type        = string
 }
 
 variable "project_name" {
-  description = "Nombre del proyecto para prefijos de recursos."
-  type        = string
+    description = "Nombre del proyecto para prefijos de recursos."
+    type        = string
 }
 
 #Llamado a Módulos
@@ -30,8 +30,8 @@ module "s3_data_lake" {
     aws_region = var.aws_region
 }
 
-module "web_hosting" {
-  source = "./modules/web_hosting"
-  project_name = var.project_name
-  web_bucket_name = var.web_bucket_name
+module "app_web" {
+    source = "./modules/app_web"
+    project_name = var.project_name
+    aws_region = var.aws_region
 }
