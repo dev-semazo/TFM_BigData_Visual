@@ -23,6 +23,12 @@ variable "project_name" {
     type        = string
 }
 
+variable "code_bucket" {
+    description = "Nombre del bucket para recursos de código."
+    type        = string
+}
+
+
 #Llamado a Módulos
 module "s3_data_lake" {
     source = "./modules/data_lake"
@@ -34,4 +40,11 @@ module "app_web" {
     source = "./modules/app_web"
     project_name = var.project_name
     aws_region = var.aws_region
+}
+
+module "compute" {
+    source = "./modules/compute"
+    project_name = var.project_name
+    aws_region = var.aws_region
+    code_bucket = var.code_bucket
 }
