@@ -1,6 +1,10 @@
 on:
   workflow_dispatch:
-  
+    inputs:
+      run_id:
+        description: 'Run ID con el artifact de Terraform Plan' 
+        required: true 
+        type: string        
 permissions:
   id-token: write # Necesario para OIDC
   contents: read  # Permite leer el código del repositorio
@@ -27,11 +31,12 @@ jobs:
         with:
           terraform_version: 1.2.5
 
-      - name: Download Terraform Plan artifact
-        uses: actions/download-artifact@v4
+      - name: Download build artifact from triggered workflow
+        uses: dawidd6/action-download-artifact@v2
         with:
-          name: tfplan-artifact 
-          path: .
+          run_id: ${{ github.event.inputs.run_id }}
+          workflow_conclusion: success
+          artifact_name: tfplan-artifact
 
       - name: Terraform Init
         id: init
