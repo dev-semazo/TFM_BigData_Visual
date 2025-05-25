@@ -63,7 +63,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       query_string = false
       headers      = ["Origin"]
       cookies {
-        forward = "all"
+        forward = "none"
       }
     }
   }
