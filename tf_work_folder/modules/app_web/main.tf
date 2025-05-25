@@ -61,7 +61,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     max_ttl                = 86400
     forwarded_values {
       query_string = false
-      headers      = ["*"]
+      headers      = ["Origin"]
       cookies {
         forward = "all"
       }
