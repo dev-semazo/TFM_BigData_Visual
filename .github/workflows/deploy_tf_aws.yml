@@ -36,7 +36,7 @@ jobs:
         with:
           run_id: ${{ github.event.inputs.run_id }}
           workflow_conclusion: success
-          artifact_name: tfplan-artifact
+          name: tfplan-artifact
 
       - name: Terraform Init
         id: init
