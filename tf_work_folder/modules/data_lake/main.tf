@@ -95,7 +95,7 @@ resource "aws_athena_workgroup" "quicksight_workgroup" {
   state = "ENABLED"
   configuration {
     result_configuration {
-      output_location = "s3://${aws_s3_bucket.bronze_bucket.name}/athena_results/"
+      output_location = "s3://${var.project_name}bronze/athena_results/"
     }
     publish_cloudwatch_metrics_enabled = false
   }
