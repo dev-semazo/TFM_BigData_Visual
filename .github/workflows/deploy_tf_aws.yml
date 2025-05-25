@@ -46,5 +46,5 @@ jobs:
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve ${{ env.TF_WORKING_DIR }}/tfplan-artifact/tfplan
         working-directory: ${{ env.TF_WORKING_DIR }}
