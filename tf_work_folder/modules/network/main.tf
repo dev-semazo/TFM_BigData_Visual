@@ -8,7 +8,7 @@ resource "aws_subnet" "private_subnet" {
     vpc_id = aws_vpc.vpc.id
     count = 1
     cidr_block = "10.0.1.0/24"
-    availability_zone = var.aws_region
+    availability_zone = "${var.aws_region}a"
     map_public_ip_on_launch = false
 }
 
