@@ -2,7 +2,7 @@ All Rights Reserved
 
 
 
-Copyright (c) 2025 Sebastián Mazo Vélez
+Copyright (c) 2025 Sebastián Mazo Vélez, Daniela Andrea Calderón Roa
 
 
 
