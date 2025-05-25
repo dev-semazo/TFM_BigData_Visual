@@ -4,7 +4,7 @@ permissions:
   id-token: write # Necesario para OIDC
   contents: read  # Permite leer el código del repositorio
 env:
-  TF_WORKING_DIR: .
+  TF_WORKING_DIR: ./tf_work_folder
 jobs:
   terraform_apply:
     name: Apply Terraform Changes
@@ -35,7 +35,7 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET_NAME }}" -backend-config="key=${{ vars.TF_STATE_FILE }}" -backend-config="region=${{ vars.AWS_REGION }}"
-        working-directory: .
+        working-directory: ${{ env.TF_WORKING_DIR }}
 
       - name: Terraform Apply
         id: apply
