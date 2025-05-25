@@ -10,7 +10,7 @@ permissions:
   contents: read  # Permite leer el código del repositorio
   actions: read
 env:
-  TF_WORKING_DIR: ./
+  TF_WORKING_DIR: tf_work_folder/
 jobs:
   terraform_apply:
     name: Apply Terraform Changes
@@ -38,6 +38,7 @@ jobs:
           run_id: ${{ github.event.inputs.run_id }}
           workflow_conclusion: success
           name: tfplan-artifact
+          path: ${{ env.TF_WORKING_DIR }}/plan/
 
       - name: Terraform Init
         id: init
@@ -46,5 +47,5 @@ jobs:
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve ${{ env.TF_WORKING_DIR }}/tfplan-artifact/tfplan
+        run: terraform apply -auto-approve ./plan/tfplan
         working-directory: ${{ env.TF_WORKING_DIR }}
