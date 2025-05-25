@@ -25,7 +25,7 @@ variable "project_name" {
 
 #Llamado a Módulos
 module "s3_data_lake" {
-    source = "tf_work_folder/modules/data_lake/main.tf"
+    source = "./tf_work_folder/modules/data_lake/main.tf"
     project_name = var.project_name
     aws_region = var.aws_region
 }
