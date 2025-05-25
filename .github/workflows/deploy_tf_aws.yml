@@ -8,6 +8,7 @@ on:
 permissions:
   id-token: write # Necesario para OIDC
   contents: read  # Permite leer el código del repositorio
+  actions: read
 env:
   TF_WORKING_DIR: tf_work_folder/
 jobs:
