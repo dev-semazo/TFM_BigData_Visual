@@ -29,3 +29,9 @@ module "s3_data_lake" {
     project_name = var.project_name
     aws_region = var.aws_region
 }
+
+module "web_hosting" {
+  source = "./modules/web_hosting"
+  project_name = var.project_name
+  web_bucket_name = var.web_bucket_name
+}
