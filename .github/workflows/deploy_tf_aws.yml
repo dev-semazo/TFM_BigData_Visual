@@ -1,5 +1,6 @@
 on:
   workflow_dispatch:
+  
 permissions:
   id-token: write # Necesario para OIDC
   contents: read  # Permite leer el código del repositorio
