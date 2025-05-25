@@ -28,6 +28,12 @@ variable "code_bucket" {
     type        = string
 }
 
+variable "account_number" {
+    description = "Numero de la cuenta AWS."
+    type        = string
+}
+
+
 
 #Llamado a Módulos
 module "s3_data_lake" {
@@ -47,4 +53,5 @@ module "compute" {
     project_name = var.project_name
     aws_region = var.aws_region
     code_bucket = var.code_bucket
+    account_number = var.account_number
 }
