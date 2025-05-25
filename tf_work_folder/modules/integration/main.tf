@@ -19,6 +19,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
     integration_method     = "POST"
     payload_format_version = "2.0"
     timeout_milliseconds   = 29000 # Máximo 29 segundos para HTTP APIs
+    depends_on = [aws_apigatewayv2_vpc_link.vpc_link_lambda]
 }
 
 resource "aws_apigatewayv2_authorizer" "cognito_authorizer_v2" {
