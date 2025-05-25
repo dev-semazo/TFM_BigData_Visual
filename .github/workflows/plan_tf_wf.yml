@@ -40,7 +40,7 @@ jobs:
 
       - name: Run tflint
         id: tflint
-        run: tflint --enable-rule=terraform_unused_declarations # Puedes añadir otras reglas o usar un archivo .tflint.hcl
+        run: tflint --enable-rule=terraform_unused_declarations
         working-directory: ${{ env.TF_WORKING_DIR }}
         continue-on-error: false # Haz que el job falle si hay errores de linting
         
@@ -62,6 +62,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tfplan-artifact
-          path: ${{ env.TF_WORKING_DIR }}/tfplan # Asegúrate de que la ruta sea correcta
-          retention-days: 15 # Opcional: Limpiar artifacts después de 1 día
+          path: ${{ env.TF_WORKING_DIR }}/tfplan
+          retention-days: 1
         
