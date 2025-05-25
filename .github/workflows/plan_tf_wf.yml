@@ -12,6 +12,9 @@ jobs:
     name: deploy to aws
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v4
         with:
