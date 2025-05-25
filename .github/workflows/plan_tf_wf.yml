@@ -30,7 +30,7 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET_NAME }}" -backend-config="key=${{ vars.TF_STATE_FILE }}" -backend-config="region=${{ vars.AWS_REGION }}"
-        working-directory: .
+        working-directory: ${{ env.TF_WORKING_DIR }}
 
       #Validación de Calidad
       - name: Install tflint
