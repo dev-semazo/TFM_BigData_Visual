@@ -27,7 +27,7 @@ resource "aws_apigatewayv2_authorizer" "cognito_authorizer_v2" {
 }
 
 resource "aws_apigatewayv2_route" "post_data_route" {
-  api_id    = aws_apigatewayv2_api.main_http_api.id
+  api_id    = aws_apigatewayv2_api.http_api.id
   route_key = "POST /data" # Combina método HTTP y path
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
   authorizer_id = aws_apigatewayv2_authorizer.cognito_authorizer_v2.id
@@ -35,7 +35,7 @@ resource "aws_apigatewayv2_route" "post_data_route" {
 }
 
 resource "aws_apigatewayv2_stage" "api_stage_v2" {
-  api_id      = aws_apigatewayv2_api.main_http_api.id
+  api_id      = aws_apigatewayv2_api.http_api.id
   name        = "prod"
   auto_deploy = true # Despliega automáticamente los cambios en las rutas/integraciones
 }
