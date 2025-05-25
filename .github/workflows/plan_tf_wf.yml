@@ -11,6 +11,8 @@ jobs:
   terraform_plan:
     name: Generate Terraform Plan
     runs-on: ubuntu-22.04
+    outputs:
+      tfplan: ${{ steps.plan.outcome }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -50,13 +52,15 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
       #Fin Validacion
       
-      
-        
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color -input=false -out=tfplan
         working-directory: ${{ env.TF_WORKING_DIR }}
         continue-on-error: false
+
+      - name: Display Terraform Plan Output
+        run: terraform show -no-color tfplan # Use -no-color for cleaner logs
+        working-directory: ${{ env.TF_WORKING_DIR }}
         
       - name: Upload Terraform Plan artifact
         uses: actions/upload-artifact@v4

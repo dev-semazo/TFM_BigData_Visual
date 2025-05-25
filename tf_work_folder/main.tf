@@ -12,3 +12,20 @@ terraform {
         region = ""
     }
 }
+
+variable "aws_region" {
+  description = "Región de AWS para desplegar los recursos."
+  type        = string
+}
+
+variable "project_name" {
+  description = "Nombre del proyecto para prefijos de recursos."
+  type        = string
+}
+
+#Llamado a Módulos
+module "s3_data_lake" {
+    source = "tf_work_folder/modules/data_lake/main.tf"
+    project_name = var.project_name
+    aws_region = var.aws_region
+}
