@@ -65,15 +65,13 @@ resource "aws_security_group" "sg_lambda_core" {
 resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
   security_group_id = aws_security_group.sg_lambda_core.id
   cidr_ipv4         = aws_vpc.vpc.cidr_block
-  from_port         = 0
   ip_protocol       = "-1"
-  to_port           = 0
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
     security_group_id = aws_security_group.sg_lambda_core.id
     cidr_ipv4 = "0.0.0.0/0"
-    ip_protocol = "-1"
+    ip_protocol = "TCP"
     from_port = 443
     to_port = 443
 }
