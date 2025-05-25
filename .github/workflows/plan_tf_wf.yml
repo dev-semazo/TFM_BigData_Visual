@@ -1,7 +1,9 @@
 on:
   push:
     branches:
-    - architecture
+      - architecture
+    paths:
+      - 'tf_work_folder/**'
 permissions:
   id-token: write # Necesario para OIDC
   contents: read  # Permite leer el código del repositorio
