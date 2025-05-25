@@ -14,7 +14,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
     api_id                 = aws_apigatewayv2_api.http_api.id
     integration_type       = "VPC_LINK" # Usar VPC Link para Lambda
     connection_type        = "VPC_LINK"
-    connection_id          = aws_apigatewayv2_api.vpc_link_lambda.id
+    connection_id          = aws_apigatewayv2_vpc_link.vpc_link_lambda.id
     integration_uri        = var.lambda_arn
     integration_method     = "POST"
     payload_format_version = "2.0"
