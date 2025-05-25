@@ -4,13 +4,21 @@ resource "aws_apigatewayv2_api" "http_api" {
     target = var.lambda_arn
 }
 
+resource "aws_apigatewayv2_vpc_link" "vpc_link_lambda" {
+    name        = "${var.project_name}-vpc-link"
+    security_group_ids = [var.security_group_id]
+    subnet_ids  = [var.subnet_id] # Subredes donde se ejecuta la Lambda
+}
+
 resource "aws_apigatewayv2_integration" "lambda_integration" {
     api_id                 = aws_apigatewayv2_api.http_api.id
-    integration_type       = "AWS_PROXY"
+    integration_type       = "VPC_LINK" # Usar VPC Link para Lambda
+    connection_type        = "VPC_LINK"
+    connection_id          = aws_apigatewayv2_api.vpc_link_lambda.id
     integration_uri        = var.lambda_arn
     integration_method     = "POST"
     payload_format_version = "2.0"
-    timeout_milliseconds = 29000 # Máximo 29 segundos para HTTP APIs
+    timeout_milliseconds   = 29000 # Máximo 29 segundos para HTTP APIs
 }
 
 resource "aws_apigatewayv2_authorizer" "cognito_authorizer_v2" {

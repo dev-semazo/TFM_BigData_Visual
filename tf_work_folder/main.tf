@@ -48,13 +48,23 @@ module "app_web" {
     aws_region = var.aws_region
 }
 
+module "network" {
+    source = "./modules/network"
+    project_name = var.project_name
+    aws_region = var.aws_region
+    account_number = var.account_number
+}
+
 module "compute" {
     source = "./modules/compute"
     project_name = var.project_name
     aws_region = var.aws_region
     code_bucket = var.code_bucket
     account_number = var.account_number
+    subnet_id = module.network.subnet_id
+    security_group_id = module.network.security_group_id
 }
+
 module "security" {
     source = "./modules/security"
     project_name = var.project_name
@@ -70,4 +80,6 @@ module "integration" {
     lambda_name = module.compute.lambda_name
     lambda_arn = module.compute.lambda_arn
     cognito_user_pool_id = module.security.cognito_user_pool_id
+    security_group_id = module.network.security_group_id
+    subnet_id = module.network.subnet_id
 }

@@ -17,3 +17,11 @@ variable "account_number" {
   description = "Numero de la cuenta AWS."
   type        = string
 }
+variable "subnet_id" {
+  description = "Lista de IDs de subredes para la configuración de VPC."
+  type        = string
+}
+variable "security_group_id" {
+  description = "ID del grupo de seguridad para la función Lambda."
+  type        = string
+}
