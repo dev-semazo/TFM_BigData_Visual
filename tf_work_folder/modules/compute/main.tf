@@ -3,7 +3,7 @@ resource "aws_lambda_function" "this" {
     handler       = "web_logic_core.handler"
     runtime       = "python3.9"
     role          = aws_iam_role.lambda_exec.arn
-    filename      = "web_logic_core.zip"
+    filename      = "s3://${var.code_bucket}/lambda_functions/web_logic_core.zip"
 }
 
 resource "aws_iam_role" "lambda_exec" {
