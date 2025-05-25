@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "bronze_bucket" {
     bucket = "${var.project_name}bronze"
-    region = var.aws_region
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "bronze_encryption" {
@@ -28,7 +27,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "athena_query_exp" {
 
 resource "aws_s3_bucket" "silver_bucket" {
     bucket = "${var.project_name}silver"
-    region = var.aws_region
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "silver_encryption" {
@@ -42,7 +40,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "silver_encryption
 
 resource "aws_s3_bucket" "gold_bucket" {
     bucket = "${var.project_name}gold"
-    region = var.aws_region
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "gold_encryption" {
@@ -77,15 +74,15 @@ resource "aws_glue_catalog_database" "gold_db" {
 #---------------------------------
 
 resource "aws_lakeformation_resource" "lf_bronze" {
-  arn = data.aws_s3_bucket.bronze_bucket.arn
+  arn = aws_s3_bucket.bronze_bucket.arn
 }
 
 resource "aws_lakeformation_resource" "lf_silver" {
-  arn = data.aws_s3_bucket.silver_bucket.arn
+  arn = aws_s3_bucket.silver_bucket.arn
 }
 
 resource "aws_lakeformation_resource" "lf_gold" {
-  arn = data.aws_s3_bucket.gold_bucket.arn
+  arn = aws_s3_bucket.gold_bucket.arn
 }
 
 #----------------------------------
