@@ -13,7 +13,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_route_table" "private_rt" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.vpc.id
 }
 
 resource "aws_vpc_endpoint" "endpoint_s3" {
