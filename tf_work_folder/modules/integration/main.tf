@@ -12,7 +12,7 @@ resource "aws_apigatewayv2_vpc_link" "vpc_link_lambda" {
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
     api_id                 = aws_apigatewayv2_api.http_api.id
-    integration_type       = "HTTP_PROXY" # Usar VPC Link para Lambda
+    integration_type       = "AWS_PROXY" # Usar VPC Link para Lambda
     connection_type        = "VPC_LINK"
     connection_id          = aws_apigatewayv2_vpc_link.vpc_link_lambda.id
     integration_uri        = var.lambda_arn
