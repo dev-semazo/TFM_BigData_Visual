@@ -36,7 +36,9 @@ resource "aws_vpc_endpoint" "endpoint_s3" {
                 ],
                 "Resource": [
                   "arn:aws:s3:::tfm-educ-app-gold",
-                  "arn:aws:s3:::tfm-educ-app-gold/*"
+                  "arn:aws:s3:::tfm-educ-app-gold/*",
+                  "arn:aws:s3:::code-tfm-semazo",
+                  "arn:aws:s3:::code-tfm-semazo/*"
                 ]
                 "Condition": {
                     "ArnEquals": {
