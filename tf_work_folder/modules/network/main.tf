@@ -77,4 +77,5 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
     ip_protocol = "TCP"
     from_port = 443
     to_port = 443
+    cidr_ipv4 = "0.0.0.0/0"
 }
