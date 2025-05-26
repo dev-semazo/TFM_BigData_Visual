@@ -54,6 +54,15 @@ resource "aws_vpc_endpoint" "endpoint_s3" {
                       "aws:PrincipalArn": "arn:aws:iam::${var.account_number}:role/core_app_lambda "
                     }
                 }
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                ],
+                "Resource": "*"
               }
             ]
         }   
