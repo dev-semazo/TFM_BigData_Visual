@@ -63,6 +63,7 @@ module "compute" {
     account_number = var.account_number
     subnet_id = module.network.subnet_id
     security_group_id = module.network.security_group_id
+    vpc_id = module.network.vpc_id
 }
 
 module "security" {
@@ -82,4 +83,5 @@ module "integration" {
     cognito_user_pool_id = module.security.cognito_user_pool_id
     security_group_id = module.network.security_group_id
     subnet_id = module.network.subnet_id
+    arn_alb_listener = module.compute.load_balancer_arn
 }

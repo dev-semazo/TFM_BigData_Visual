@@ -25,3 +25,7 @@ variable "security_group_id" {
   description = "ID del grupo de seguridad para la función Lambda."
   type        = string
 }
+variable "vpc_id" {
+  description = "ID de la VPC donde se desplegarán los recursos."
+  type        = string
+}

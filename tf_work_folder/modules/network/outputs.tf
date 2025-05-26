@@ -7,3 +7,8 @@ output "security_group_id" {
     description = "ID of the security group"
     value       = aws_security_group.sg_lambda_core.id
 }
+
+output "vpc_id" {
+    description = "ID of the VPC"
+    value       = aws_vpc.vpc.id
+}

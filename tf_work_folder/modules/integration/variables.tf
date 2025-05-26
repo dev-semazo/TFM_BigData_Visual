@@ -39,3 +39,8 @@ variable "security_group_id" {
   description = "ID del grupo de seguridad para la función Lambda."
   type        = string
 }
+
+variable "arn_alb_listener" {
+  description = "ARN del listener del Application Load Balancer."
+  type        = string
+}

@@ -13,3 +13,42 @@ resource "aws_lambda_function" "lambda_web_logic_core" {
     }
 }
 
+resource "aws_lb" "web_logic_core_lb" {
+    name               = "${var.project_name}-web-logic-core-lb"
+    internal           = true
+    load_balancer_type = "network"
+    subnets            = [var.subnet_id]
+}
+
+resource "aws_lb_target_group" "web_logic_core_tg" {
+    name = "${var.project_name}-web-logic-core-tg"
+    target_type = "lambda"
+    port = 80
+    protocol = "TCP"
+    vpc_id = var.vpc_id
+}
+
+resource "aws_lambda_permission" "with_lb" {
+  statement_id  = "AllowExecutionFromlb"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda_web_logic_core.function_name
+  principal     = "elasticloadbalancing.amazonaws.com"
+  source_arn    = aws_lb_target_group.web_logic_core_tg.arn
+}
+
+resource "aws_lb_target_group_attachment" "test" {
+  target_group_arn = aws_lb_target_group.web_logic_core_tg.arn
+  target_id        = aws_lambda_function.lambda_web_logic_core.arn
+  depends_on       = [aws_lambda_permission.with_lb]
+}
+
+resource "aws_lb_listener" "http_listener" {
+  load_balancer_arn = aws_lb.web_logic_core_lb.arn
+  port              = 80 # Puerto que el NLB escucha
+  protocol          = "TCP" # Protocolo del listener
+
+  default_action {
+    target_group_arn = aws_lb_target_group.web_logic_core_tg.arn
+    type             = "forward"
+  }
+}

@@ -12,12 +12,12 @@ resource "aws_apigatewayv2_vpc_link" "vpc_link_lambda" {
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
     api_id                 = aws_apigatewayv2_api.http_api.id
-    integration_type       = "AWS_PROXY" # Usar VPC Link para Lambda
+    integration_type       = "HTTP_PROXY" # Usar VPC Link para Lambda
     connection_type        = "VPC_LINK"
     connection_id          = aws_apigatewayv2_vpc_link.vpc_link_lambda.id
-    integration_uri        = var.lambda_arn
+    integration_uri        = var.arn_alb_listener
     integration_method     = "POST"
-    payload_format_version = "2.0"
+    payload_format_version = "1.0"
     timeout_milliseconds   = 29000 # Máximo 29 segundos para HTTP APIs
     depends_on = [aws_apigatewayv2_vpc_link.vpc_link_lambda]
 }
@@ -49,10 +49,3 @@ resource "aws_apigatewayv2_stage" "api_stage_v2" {
   auto_deploy = true # Despliega automáticamente los cambios en las rutas/integraciones
 }
 
-resource "aws_lambda_permission" "allow_apigatewayv2_to_invoke_lambda" {
-  statement_id  = "AllowAPIGatewayV2Invoke"
-  action        = "lambda:InvokeFunction"
-  function_name = var.lambda_name
-  principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*"
-}
