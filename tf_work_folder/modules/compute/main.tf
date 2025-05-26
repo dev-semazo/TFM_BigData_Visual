@@ -24,6 +24,12 @@ resource "aws_lb_target_group" "web_logic_core_tg" {
     name = "${var.project_name}-web-logic-core-tg"
     target_type = "lambda"
     vpc_id = var.vpc_id
+    health_check {
+        enabled = true
+        interval = 300
+        port = "traffic-port"
+        path = "/"
+    }
 }
 
 resource "aws_lambda_permission" "with_lb" {
