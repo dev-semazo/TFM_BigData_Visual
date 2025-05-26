@@ -19,7 +19,7 @@ variable "account_number" {
 }
 variable "subnet_id" {
   description = "Lista de IDs de subredes para la configuración de VPC."
-  type        = string
+  type        = list(string)
 }
 variable "security_group_id" {
   description = "ID del grupo de seguridad para la función Lambda."

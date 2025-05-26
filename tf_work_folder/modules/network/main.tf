@@ -12,6 +12,15 @@ resource "aws_subnet" "private_subnet" {
     map_public_ip_on_launch = false
 }
 
+
+resource "aws_subnet" "private_subnet_b" {
+    vpc_id = aws_vpc.vpc.id
+    count = 1
+    cidr_block = "10.0.2.0/24"
+    availability_zone = "${var.aws_region}b"
+    map_public_ip_on_launch = false
+}
+
 resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.vpc.id
 }

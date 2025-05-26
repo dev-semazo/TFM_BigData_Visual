@@ -32,7 +32,7 @@ variable "cognito_user_pool_id" {
 
 variable "subnet_id" {
   description = "ID de la subred para la configuración de VPC."
-  type        = string
+  type        = list(string)
 }
 
 variable "security_group_id" {

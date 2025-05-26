@@ -7,7 +7,7 @@ resource "aws_apigatewayv2_api" "http_api" {
 resource "aws_apigatewayv2_vpc_link" "vpc_link_lambda" {
     name        = "${var.project_name}-vpc-link"
     security_group_ids = [var.security_group_id]
-    subnet_ids  = [var.subnet_id] # Subredes donde se ejecuta la Lambda
+    subnet_ids  = var.subnet_id # Subredes donde se ejecuta la Lambda
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {

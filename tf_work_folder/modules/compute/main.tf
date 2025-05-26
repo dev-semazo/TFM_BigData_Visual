@@ -9,7 +9,7 @@ resource "aws_lambda_function" "lambda_web_logic_core" {
     s3_key        = "lambda_functions/web_logic_core.zip"
     vpc_config {
         security_group_ids = [var.security_group_id]
-        subnet_ids         = [var.subnet_id]
+        subnet_ids         = var.subnet_id
     }
 }
 
@@ -17,16 +17,13 @@ resource "aws_lb" "web_logic_core_lb" {
     name               = "${var.project_name}-web-logic-core-lb"
     internal           = true
     load_balancer_type = "application"
-    subnets            = [var.subnet_id]
+    subnets            = var.subnet_id
 }
 
 resource "aws_lb_target_group" "web_logic_core_tg" {
     name = "${var.project_name}-web-logic-core-tg"
     target_type = "lambda"
     vpc_id = var.vpc_id
-    health_check {
-        enabled = false # Generalmente deshabilitado para Lambdas
-    }
 }
 
 resource "aws_lambda_permission" "with_lb" {
