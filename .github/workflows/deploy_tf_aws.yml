@@ -44,7 +44,10 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET_NAME }}" -backend-config="key=${{ vars.TF_STATE_FILE }}" -backend-config="region=${{ vars.AWS_REGION }}"
         working-directory: ${{ env.TF_WORKING_DIR }}
-
+        
+      - name: Verify AWS Caller Identity
+        run: aws sts get-caller-identity
+        
       - name: Terraform Apply
         id: apply
         run: terraform apply -auto-approve ./plan/tfplan
