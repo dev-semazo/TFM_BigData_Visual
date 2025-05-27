@@ -46,6 +46,5 @@ resource "aws_lambda_permission" "allow_apigw" {
     action        = "lambda:InvokeFunction"
     function_name = var.lambda_name
     principal     = "apigateway.amazonaws.com"
-
-    source_arn = "${aws_apigatewayv2_api.http_api.execution_arn}/prod/data"
+    source_arn = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*/data"
 }
