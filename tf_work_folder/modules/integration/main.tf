@@ -47,6 +47,5 @@ resource "aws_lambda_permission" "allow_apigw" {
     function_name = var.lambda_name
     principal     = "apigateway.amazonaws.com"
 
-    # The source ARN is the API Gateway ARN
-    source_arn = "${aws_apigatewayv2_api.http_api}/prod/data"
+    source_arn = "${aws_apigatewayv2_api.http_api.execution_arn}/prod/data"
 }
