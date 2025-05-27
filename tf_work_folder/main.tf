@@ -81,7 +81,5 @@ module "integration" {
     lambda_name = module.compute.lambda_name
     lambda_arn = module.compute.lambda_arn
     cognito_user_pool_id = module.security.cognito_user_pool_id
-    security_group_id = module.network.security_group_id
-    subnet_id = module.network.subnet_id
-    arn_alb_listener = module.compute.load_balancer_arn
+    lambda_invoke_arn = module.compute.lambda_invoke_arn
 }

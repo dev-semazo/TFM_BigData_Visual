@@ -30,17 +30,7 @@ variable "cognito_user_pool_id" {
   type        = string
 }
 
-variable "subnet_id" {
-  description = "ID de la subred para la configuración de VPC."
-  type        = list(string)
-}
-
-variable "security_group_id" {
-  description = "ID del grupo de seguridad para la función Lambda."
-  type        = string
-}
-
-variable "arn_alb_listener" {
-  description = "ARN del listener del Application Load Balancer."
+variable "lambda_invoke_arn" {
+  description = "ARN de la función Lambda para invocación."
   type        = string
 }
