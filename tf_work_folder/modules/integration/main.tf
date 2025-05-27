@@ -29,7 +29,7 @@ resource "aws_apigatewayv2_authorizer" "cognito_authorizer_v2" {
 
 resource "aws_apigatewayv2_route" "post_data_route" {
   api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = "GET /data" # Combina método HTTP y path
+  route_key = "POST /data" # Combina método HTTP y path
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
   authorizer_id = aws_apigatewayv2_authorizer.cognito_authorizer_v2.id
   authorization_type = "JWT" # Usa el tipo JWT para el autorizador Cognito
