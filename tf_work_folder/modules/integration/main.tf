@@ -9,7 +9,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
     integration_type       = "AWS_PROXY" # Usar VPC Link para Lambda
     connection_type        = "INTERNET"
     integration_uri        = var.lambda_invoke_arn
-    integration_method     = "GET"
+    integration_method     = "POST"
     payload_format_version = "1.0"
     timeout_milliseconds   = 29000 # Máximo 29 segundos para HTTP APIs
 }
