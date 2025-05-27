@@ -7,9 +7,6 @@ resource "aws_lambda_function" "lambda_web_logic_core" {
     role          = "arn:aws:iam::${var.account_number}:role/core_app_lambda"
     s3_bucket     = var.code_bucket
     s3_key        = "lambda_functions/web_logic_core.zip"
-    vpc_config {
-        security_group_ids = [var.security_group_id]
-        subnet_ids         = var.subnet_id
-    }
+    
 }
 

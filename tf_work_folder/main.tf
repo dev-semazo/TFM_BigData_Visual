@@ -48,22 +48,12 @@ module "app_web" {
     aws_region = var.aws_region
 }
 
-module "network" {
-    source = "./modules/network"
-    project_name = var.project_name
-    aws_region = var.aws_region
-    account_number = var.account_number
-}
-
 module "compute" {
     source = "./modules/compute"
     project_name = var.project_name
     aws_region = var.aws_region
     code_bucket = var.code_bucket
     account_number = var.account_number
-    subnet_id = module.network.subnet_id
-    security_group_id = module.network.security_group_id
-    vpc_id = module.network.vpc_id
 }
 
 module "security" {
