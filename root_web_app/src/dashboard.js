@@ -1,5 +1,6 @@
 import { fetchAuthSession } from '@aws-amplify/auth';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { get } from 'aws-amplify/api';
 
 function Dashboard() {
 
@@ -20,21 +21,20 @@ async function populateDashboard() {
     const container = document.getElementById('dashboard-container');
     try {
         const session = await fetchAuthSession();
-        /*
-        const response = await fetch('https://example.com/api/dashboard', {
-                method: 'GET',
-                headers: {
-                    Authorization: jwt,
-                    'Content-Type': 'application/json'
-                }
+        const dashCall = await get({
+            apiName: 'tfm-educ-app-api',
+            path: '/dashboard',
+            headers: {
+                Authorization: session.tokens?.idToken
             }
-        )
-        setImgUrl(await response.json().url);
-        */
-        const data = { url: "https://via.placeholder.com/300x200.png?text=Dashboard+Image" };
-        container.innerHTML = `<img src="${data.url}" alt="Dashboard Image" />`;
+        })
+        const response = await dashCall.response;
+        container.innerHTML = `<img src="${response.dashboard}" alt="Dashboard Image" />`;
+        console.log('Dashboard image loaded successfully');
+
     }
     catch (error) {
+        console.error('Error fetching dashboard:', error);
         container.innerHTML = '<p>Error loading image.</p>';
     }
 }
