@@ -28,7 +28,10 @@ async function populateDashboard() {
             path: '/dashboard',
             headers: {
                 'authorization': session.tokens?.idToken.toString(),
-                'Access-Control-Allow-Origin': 'https://web.d347kktgec41m0.amplifyapp.com',
+                'Access-Control-Allow-Origin': 'https://web.d347kktgec41m0.amplifyapp.com', 
+                'Access-Control-Allow-Methods': 'OPTIONS, GET', 
+                'Access-Control-Allow-Headers': 'Content-Type, authorization, x-amz-date, x-amz-security-token ', 
+                'Access-Control-Allow-Credentials': 'true'
             }
         })
         const response = await dashCall.response;
