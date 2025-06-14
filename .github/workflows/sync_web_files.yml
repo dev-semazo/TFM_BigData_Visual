@@ -11,7 +11,6 @@ permissions:
 env:
   SOURCE_CODE_PATH: web_source/
   S3_DESTINATION: s3://${{ secrets.WEB_S3_BUCKET}}
-  AWS_REGION: ${{ secrets.AWS_REGION }}
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE  }}
 jobs:
   build:
@@ -25,7 +24,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
           role-session-name: GitHub-OIDC-S3-Sync
 
       - name: Sync files to S3
