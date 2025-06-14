@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "educappsdd978580a_identitypool_d978580a",
+    "identityPoolName": "rootwebapp4bf6a725_identitypool_4bf6a725",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "educapd978580a",
-    "userPoolName": "educappsdd978580a_userpool_d978580a",
+    "resourceNameTruncated": "rootwe4bf6a725",
+    "userPoolName": "rootwebapp4bf6a725_userpool_4bf6a725",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "educapd978580a_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "rootwe4bf6a725_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "d978580a",
-    "resourceName": "educappsdd978580a",
+    "sharedId": "4bf6a725",
+    "resourceName": "rootwebapp4bf6a725",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "usernameAttributes": [
