@@ -11,7 +11,7 @@ permissions:
 env:
   SOURCE_CODE_PATH: web_source/
   S3_DESTINATION: s3://${{ secrets.WEB_S3_BUCKET}}
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_REGION: ${{ vars.AWS_REGION }}
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE  }}
 jobs:
   build:
