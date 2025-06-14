@@ -1,0 +1,19 @@
+body { background: #f8f9fa; }
+.dashboard-container { max-width: 1200px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.dashboard-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
+.dashboard-section { margin-bottom: 30px; }
+.auth {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px 28px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#login {
+    display: none;
+}
+
