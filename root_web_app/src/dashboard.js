@@ -19,13 +19,14 @@ function Dashboard() {
 async function populateDashboard() {
     console.log('populateDashboard called');
     const container = document.getElementById('dashboard-container');
+    
     try {
         const session = await fetchAuthSession();
         const dashCall = await get({
             apiName: 'tfm-educ-app-api',
             path: '/dashboard',
             headers: {
-                Authorization: session.tokens?.idToken
+                authorization: session.tokens?.idToken.toString()
             }
         })
         const response = await dashCall.response;
@@ -35,7 +36,7 @@ async function populateDashboard() {
     }
     catch (error) {
         console.error('Error fetching dashboard:', error);
-        container.innerHTML = '<p>Error loading image.</p>';
+        container.innerHTML = '<p>Error generando Dashboard.</p>';
     }
 }
 
