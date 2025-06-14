@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: web_source/educ_app_sd
+  - appRoot: root_web_app
     frontend:
       phases:
         preBuild:
