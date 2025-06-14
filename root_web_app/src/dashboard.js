@@ -22,11 +22,13 @@ async function populateDashboard() {
     
     try {
         const session = await fetchAuthSession();
+        console.log(session.tokens?.idToken.toString());
         const dashCall = await get({
             apiName: 'tfm-educ-app-api',
             path: '/dashboard',
             headers: {
-                authorization: session.tokens?.idToken.toString()
+                'authorization': session.tokens?.idToken.toString(),
+                'Access-Control-Allow-Origin': 'https://web.d347kktgec41m0.amplifyapp.com',
             }
         })
         const response = await dashCall.response;
