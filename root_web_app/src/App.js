@@ -17,6 +17,7 @@ Amplify.configure({
       'tfm-educ-app-api': {
         endpoint: 'https://dy00ztk93a.execute-api.us-east-1.amazonaws.com/prod',
         region: 'us-east-1',
+        authorizationType: 'AMAZON_COGNITO_USER_POOLS',
       }
     }
   },
