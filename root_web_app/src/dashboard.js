@@ -10,7 +10,7 @@ function Dashboard() {
     return (
         <div className="App">
             <div id="dashboard-container">
-                
+                <p> Cargando dashboard... </p>
             </div>
         </div>
     );
@@ -19,19 +19,16 @@ function Dashboard() {
 async function populateDashboard() {
     console.log('populateDashboard called');
     const container = document.getElementById('dashboard-container');
-    
+    const session = await fetchAuthSession();
+    const jwt_token = session.tokens?.idToken.toString();
     try {
-        const session = await fetchAuthSession();
-        console.log(session.tokens?.idToken.toString());
+        
         const dashCall = await get({
             apiName: 'tfm-educ-app-api',
             path: '/dashboard',
             headers: {
-                'authorization': session.tokens?.idToken.toString(),
-                'Access-Control-Allow-Origin': 'https://web.d347kktgec41m0.amplifyapp.com', 
-                'Access-Control-Allow-Methods': 'OPTIONS, GET', 
-                'Access-Control-Allow-Headers': 'Content-Type, authorization, x-amz-date, x-amz-security-token ', 
-                'Access-Control-Allow-Credentials': 'true'
+                'authorization': `Bearer ${jwt_token}`,
+                'Content-Type': 'application/json'
             }
         })
         const response = await dashCall.response;
