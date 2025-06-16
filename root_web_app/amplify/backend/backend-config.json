@@ -1,4 +1,20 @@
 {
+  "api": {
+    "tfm01api": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "rootwebapp8453b4ca"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "rootwebapp4bf6a725": {
       "customAuth": false,
@@ -25,6 +41,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "rootwebapp8453b4ca": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_rootwebapp8453b4ca_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rootwebapp8453b4ca"
+        }
+      ]
+    },
+    "AMPLIFY_function_rootwebapp8453b4ca_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rootwebapp8453b4ca"
+        }
+      ]
     }
   }
 }

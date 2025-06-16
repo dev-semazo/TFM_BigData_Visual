@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "paths": {
+    "/dashboard": {
+      "name": "/dashboard",
+      "lambdaFunction": "rootwebapp8453b4ca",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
+      }
+    }
+  }
+}

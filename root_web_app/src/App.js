@@ -7,21 +7,6 @@ import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(awsconfig)
-const existingConfig = Amplify.getConfig();
-Amplify.configure({ 
-  ...existingConfig, 
-  API: {
-    ...existingConfig.API,
-    REST: {
-      ...existingConfig.API?.REST,
-      'tfm-educ-app-api': {
-        endpoint: 'https://dy00ztk93a.execute-api.us-east-1.amazonaws.com/prod',
-        region: 'us-east-1',
-        authorizationType: 'AMAZON_COGNITO_USER_POOLS',
-      }
-    }
-  },
-});
 
 function App() {
   return (

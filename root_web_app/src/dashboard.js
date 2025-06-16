@@ -1,48 +1,40 @@
-import { fetchAuthSession } from '@aws-amplify/auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { get } from 'aws-amplify/api';
 
 function Dashboard() {
+    const [dashboardData, setDashboardData] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        populateDashboard();
+        populateDashboard(setDashboardData, setError);
     }, []);
     return (
         <div className="App">
             <div id="dashboard-container">
-                <p> Cargando dashboard... </p>
+                {error && <p>Error al cargar el dashboard: {error}</p>}
+                {!error && !dashboardData && <p>Cargando dashboard...</p>}
+                {dashboardData && <p>{JSON.stringify(dashboardData, null, 2)}</p>}
             </div>
         </div>
     );
 }
 
-async function populateDashboard() {
-    console.log('populateDashboard called');
-    const container = document.getElementById('dashboard-container');
-    const session = await fetchAuthSession();
-    const jwt_token = session.tokens?.idToken.toString();
+async function populateDashboard(setDashboardData, setError) {
     try {
-        
         const dashCall = await get({
-            apiName: 'tfm-educ-app-api',
-            path: '/dashboard',
-            headers: {
-                'authorization': `Bearer ${jwt_token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        const response = await dashCall.response;
-        container.innerHTML = `<img src="${response.dashboard}" alt="Dashboard Image" />`;
-        console.log('Dashboard image loaded successfully');
-
+            apiName: 'tfm01api',
+            path: '/dashboard'
+        });
+        const rawText = await dashCall.response;
+        const responseWrapper = new Response(rawText.body);
+        const data = await responseWrapper.json();
+        setDashboardData(data);                               
     }
     catch (error) {
-        console.error('Error fetching dashboard:', error);
-        container.innerHTML = '<p>Error generando Dashboard.</p>';
+        setError(error.message);
+        console.log('Error fetching dashboard:', error);
     }
 }
-
-
 
 
 export default Dashboard ;
