@@ -42,12 +42,6 @@ module "s3_data_lake" {
     aws_region = var.aws_region
 }
 
-module "app_web" {
-    source = "./modules/app_web"
-    project_name = var.project_name
-    aws_region = var.aws_region
-}
-
 module "compute" {
     source = "./modules/compute"
     project_name = var.project_name
@@ -62,14 +56,3 @@ module "security" {
     aws_region = var.aws_region
 }
 
-module "integration" {
-    source = "./modules/integration"
-    project_name = var.project_name
-    aws_region = var.aws_region
-    account_number = var.account_number
-    code_bucket = var.code_bucket
-    lambda_name = module.compute.lambda_name
-    lambda_arn = module.compute.lambda_arn
-    cognito_user_pool_id = module.security.cognito_user_pool_id
-    lambda_invoke_arn = module.compute.lambda_invoke_arn
-}
