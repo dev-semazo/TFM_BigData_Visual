@@ -43,4 +43,4 @@ jobs:
       - name: Sync files to S3
         run: |
           echo "Sincronizando desde ${{env.SOURCE_CODE_PATH}} a ${{env.S3_DESTINATION}}"
-          aws s3 sync "${{env.SOURCE_CODE_PATH}}" "${{env.S3_DESTINATION}}" --delete
+          aws s3 sync "${{env.SOURCE_CODE_PATH}}" "${{env.S3_DESTINATION}}" --delete --exclude "*" --include "*.zip"
