@@ -5,6 +5,6 @@ resource "aws_lambda_function" "bronce_etl_logic" {
     runtime       = "python3.9"
     role          = "arn:aws:iam::${var.account_number}:role/core_app_lambda"
     s3_bucket     = var.code_bucket
-    s3_key        = "lambda_functions/etl_bronce.zip"
+    s3_key        = "etl_bronce.zip"
 }
 
