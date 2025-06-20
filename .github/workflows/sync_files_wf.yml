@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  SOURCE_CODE_PATH: app_code/
+  SOURCE_CODE_PATH: app_code/lambda_functions/
   S3_DESTINATION: s3://${{ secrets.CODE_S3_BUCKET}}
   AWS_REGION: ${{ vars.AWS_REGION }}
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE  }}
@@ -20,7 +20,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-    
+      - name: zip files
+        uses: vimtor/action-zip@v1.2
+        with:
+          files: ${{env.SOURCE_CODE_PATH}}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -30,8 +33,17 @@ jobs:
           
       - name: Verify AWS Caller Identity
         run: aws sts get-caller-identity
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          
+      - name: execute py script 
+        run: |
+          python zip_files.py
         
       - name: Sync files to S3
         run: |
-          echo "Sincronizando desde ${SOURCE_CODE_PATH} a ${S3_DESTINATION}"
-          aws s3 sync "${SOURCE_CODE_PATH}" "${S3_DESTINATION}" --delete
+          echo "Sincronizando desde ${{env.SOURCE_CODE_PATH}} a ${{env.S3_DESTINATION}}"
+          aws s3 sync "${{env.SOURCE_CODE_PATH}}" "${{env.S3_DESTINATION}}" --delete
