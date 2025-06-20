@@ -19,11 +19,8 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: zip files
-        uses: vimtor/action-zip@v1.2
-        with:
-          files: ${{env.SOURCE_CODE_PATH}}
+        uses:  actions/checkout@v2
+        
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
