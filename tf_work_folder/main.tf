@@ -50,9 +50,3 @@ module "compute" {
     account_number = var.account_number
 }
 
-module "security" {
-    source = "./modules/security"
-    project_name = var.project_name
-    aws_region = var.aws_region
-}
-
