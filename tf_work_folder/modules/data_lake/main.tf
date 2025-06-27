@@ -138,7 +138,7 @@ resource "aws_iam_role_policy" "crawl_policy" {
 resource "aws_glue_crawler" "crawler_silver_munic" {
   database_name = aws_glue_catalog_database.silver_db.name
   name          = "gc_silver_munic"
-  role          = aws_iam_role.rawl_role.arn
+  role          = aws_iam_role.crawl_role.arn
 
   s3_target {
     path = "s3://${aws_s3_bucket.silver_bucket.bucket}/cobertura_municipios/"
@@ -149,7 +149,7 @@ resource "aws_glue_crawler" "crawler_silver_munic" {
 resource "aws_glue_crawler" "crawler_silver_nived" {
   database_name = aws_glue_catalog_database.silver_db.name
   name          = "gc_silver_nived"
-  role          = aws_iam_role.rawl_role.arn
+  role          = aws_iam_role.crawl_role.arn
 
   s3_target {
     path = "s3://${aws_s3_bucket.silver_bucket.bucket}/nivel_educativo_edad/"
@@ -160,7 +160,7 @@ resource "aws_glue_crawler" "crawler_silver_nived" {
 resource "aws_glue_crawler" "crawler_silver_mat_educ" {
   database_name = aws_glue_catalog_database.silver_db.name
   name          = "gc_silver_mat_educ"
-  role          = aws_iam_role.rawl_role.arn
+  role          = aws_iam_role.crawl_role.arn
 
   s3_target {
     path = "s3://${aws_s3_bucket.silver_bucket.bucket}/matriculas_educacion/"
