@@ -13,7 +13,9 @@ function Dashboard() {
             <div id="dashboard-container">
                 {error && <p>Error al cargar el dashboard: {error}</p>}
                 {!error && !dashboardData && <p>Cargando dashboard...</p>}
-                {dashboardData && <p>{JSON.stringify(dashboardData, null, 2)}</p>}
+                {dashboardData &&  (
+                    <div dangerouslySetInnerHTML={{ __html: dashboardData }} />
+                )}
             </div>
         </div>
     );
@@ -28,9 +30,9 @@ async function populateDashboard(setDashboardData, setError) {
         const rawText = await dashCall.response;
         const responseWrapper = new Response(rawText.body);
         const data = await responseWrapper.json();
-        setDashboardData(data);                               
+        setDashboardData(data);
     }
-    catch (error) {
+        catch (error) {
         setError(error.message);
         console.log('Error fetching dashboard:', error);
     }
