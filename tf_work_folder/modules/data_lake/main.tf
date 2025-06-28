@@ -11,20 +11,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bronze_encryption
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "athena_query_exp" {
-  bucket = aws_s3_bucket.bronze_bucket.id
-  rule {
-    id = "query_results_expiration"
-    filter {
-      prefix = "athena_results/"
-    }
-    expiration {
-      days = 5
-    }
-    status = "Enabled"
-  }
-}
-
 resource "aws_s3_bucket" "silver_bucket" {
     bucket = "${var.project_name}silver"
 }
@@ -74,12 +60,6 @@ resource "aws_athena_workgroup" "quicksight_workgroup" {
   name = "${var.project_name}athena"
   description = "Workgroup de Athena para consultas de QuickSight"
   state = "ENABLED"
-  configuration {
-    result_configuration {
-      output_location = "s3://${var.project_name}bronze/athena_results/"
-    }
-    publish_cloudwatch_metrics_enabled = false
-  }
 }
 
 #----------------------------------
