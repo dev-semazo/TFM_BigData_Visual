@@ -19,7 +19,7 @@
       "function": {
         "rootwebapp8453b4ca": {
           "deploymentBucketName": "amplify-rootwebapp-dev-597ef-deployment",
-          "s3Key": "amplify-builds/rootwebapp8453b4ca-4a5a2f546b4c594b3059-build.zip"
+          "s3Key": "amplify-builds/rootwebapp8453b4ca-6565696b32367830686f-build.zip"
         }
       },
       "api": {

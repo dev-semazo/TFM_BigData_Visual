@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { get } from 'aws-amplify/api';
+import { secret } from '@aws-amplify/backend';
 
 function Dashboard() {
     const [dashboardData, setDashboardData] = useState(null);
@@ -13,8 +13,14 @@ function Dashboard() {
             <div id="dashboard-container">
                 {error && <p>Error al cargar el dashboard: {error}</p>}
                 {!error && !dashboardData && <p>Cargando dashboard...</p>}
-                {dashboardData &&  (
-                    <div dangerouslySetInnerHTML={{ __html: dashboardData }} />
+                {dashboardData && (
+                    <iframe
+                        src={dashboardData}
+                        frameborder="0"
+                        width="800"
+                        height="600"
+                        allowtransparency
+                    />
                 )}
             </div>
         </div>
@@ -23,14 +29,19 @@ function Dashboard() {
 
 async function populateDashboard(setDashboardData, setError) {
     try {
-        const dashCall = await get({
-            apiName: 'tfm01api',
-            path: '/dashboard'
-        });
-        const rawText = await dashCall.response;
-        const responseWrapper = new Response(rawText.body);
-        const data = await responseWrapper.json();
-        setDashboardData(data);
+        const jwt = require("jsonwebtoken");
+        const METABASE_SITE_URL = "http://ec2-54-166-177-96.compute-1.amazonaws.com:3000/";
+        const METABASE_SECRET_KEY = secret('METABASE_SECRET_KEY');
+        const payload = {
+        resource: { dashboard: 2 },
+        params: {},
+        exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
+        };
+        const token = jwt.sign(payload, METABASE_SECRET_KEY);
+
+        const iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token +
+        "#bordered=true&titled=true";
+        setDashboardData(iframeUrl);
     }
         catch (error) {
         setError(error.message);
