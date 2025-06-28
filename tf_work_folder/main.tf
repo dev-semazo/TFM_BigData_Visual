@@ -50,3 +50,6 @@ module "compute" {
     account_number = var.account_number
 }
 
+module "backend" {
+    source = "./modules/backend"
+}
