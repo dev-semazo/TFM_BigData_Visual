@@ -66,6 +66,14 @@
           "resourceName": "rootwebapp8453b4ca"
         }
       ]
+    },
+    "AMPLIFY_function_rootwebapp8453b4ca_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rootwebapp8453b4ca"
+        }
+      ]
     }
   }
 }

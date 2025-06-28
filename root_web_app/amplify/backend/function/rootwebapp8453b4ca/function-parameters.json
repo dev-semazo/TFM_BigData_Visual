@@ -1,3 +1,6 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "secretNames": [
+    "METABASE_SECRET_KEY"
+  ]
 }

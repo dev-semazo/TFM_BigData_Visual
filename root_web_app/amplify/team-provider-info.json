@@ -19,7 +19,8 @@
       "function": {
         "rootwebapp8453b4ca": {
           "deploymentBucketName": "amplify-rootwebapp-dev-597ef-deployment",
-          "s3Key": "amplify-builds/rootwebapp8453b4ca-6565696b32367830686f-build.zip"
+          "s3Key": "amplify-builds/rootwebapp8453b4ca-52737041344364333174-build.zip",
+          "secretsPathAmplifyAppId": "d347kktgec41m0"
         }
       },
       "api": {
