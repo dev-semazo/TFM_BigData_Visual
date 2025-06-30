@@ -4,9 +4,12 @@ import { deleteUser } from 'aws-amplify/auth';
 function Header({ signOut }) {
     const handleDeleteAccount = async () => {
         try {
-            if(window.confirm("¿Está seguro que desea eliminar su cuenta?"))
+            if(window.confirm("¿Está seguro que desea eliminar su cuenta?")) {
                 await deleteUser();
-                alert("Cuenta eliminada, vuelva pronto!")
+                alert("Cuenta eliminada, vuelva pronto!");
+            } else {
+                alert("Cuenta no eliminada");
+            }
         } catch (error) {
             console.log(error);
         }

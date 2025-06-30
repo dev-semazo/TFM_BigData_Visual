@@ -35,6 +35,17 @@
   cursor: pointer;
 }
 
+#deleteaccount {
+  position: absolute;
+  top: 20px;
+  right: 180px; 
+  background-color: #9011da;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
