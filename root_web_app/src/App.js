@@ -5,6 +5,7 @@ import { Amplify } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import './App.css'
 
 Amplify.configure(awsconfig)
 
@@ -14,10 +15,9 @@ function App() {
       <Authenticator>
         {({ signOut }) => (
         <main className="App-main"> 
-          <Header />     
+          <Header signOut={signOut} />     
           <Dashboard/>
           
-          <button onClick={signOut} id="logoutbutton">Cerrar Sesión</button>
         </main>
         )}
       </Authenticator>
