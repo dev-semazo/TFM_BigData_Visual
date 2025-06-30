@@ -8,21 +8,21 @@ function Dashboard() {
     useEffect(() => {
         populateDashboard(setDashboardData, setError);
     }, []);
+
     return (
-        <div className="App">
-            <div id="dashboard-container">
-                {error && <p>Error al cargar el dashboard: {error}</p>}
-                {!error && !dashboardData && <p>Cargando dashboard...</p>}
-                {dashboardData && (
-                    <iframe
-                        src={dashboardData}
-                        frameborder="0"
-                        width="800"
-                        height="600"
-                        allowtransparency
-                    />
-                )}
-            </div>
+        <div id="dashboard-container">
+            {error && <p>Error al cargar el dashboard: {error}</p>}
+            {!error && !dashboardData && <p>Cargando dashboard...</p>}
+            {dashboardData && (
+                <iframe
+                    src={dashboardData}
+                    title="Dashboard"
+                    width="100%"
+                    height="600"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                />
+            )}
         </div>
     );
 }

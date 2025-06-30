@@ -13,9 +13,10 @@ function App() {
     <div className="App">
       <Authenticator>
         {({ signOut }) => (
-        <main className="App-main">
-          <Header />
-          <Dashboard />
+        <main className="App-main"> 
+          <Header />     
+          <Dashboard/>
+          
           <button onClick={signOut} id="logoutbutton">Cerrar Sesión</button>
         </main>
         )}
