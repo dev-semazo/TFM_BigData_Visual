@@ -18,7 +18,7 @@ function Dashboard() {
                     src={dashboardData}
                     title="Dashboard"
                     width="100%"
-                    height="600"
+                    height="1000"
                     style={{ border: 0 }}
                     allowFullScreen
                 />
