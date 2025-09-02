@@ -35,7 +35,8 @@ def get_data():
     # Start Athena query
     response = athena_client.start_query_execution(
         QueryString=query,
-        QueryExecutionContext={'Database': 'tfm-educ-app-gold'}
+        QueryExecutionContext={'Database': 'tfm-educ-app-gold'},
+        WorkGroup = 'tfm-educ-app-athena'
     )
     query_execution_id = response['QueryExecutionId']
     
@@ -193,4 +194,5 @@ def lambda_handler(event, context):
         return {
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})
+
         }
